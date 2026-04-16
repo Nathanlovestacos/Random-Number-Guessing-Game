@@ -1,28 +1,45 @@
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public TMP_InputField inputField;
     public TextMeshProUGUI feedbackText;
-    public TextMeshProUGUI attemptsText; // Shows "Lives: 3"
+    public TextMeshProUGUI attemptsText;
+    public GameObject restartButton;
+    public GameObject submitButton;
 
-    private int targetNumber;
+    public int targetNumber;
     private int attemptsLeft;
-    public int maxAttempts = 3; // Set this in Inspector
+    public int maxAttempts = 3;
 
+    public static GameController instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
-        RestartGame();
+        StartGame();
+        inputField.ActivateInputField();
     }
 
-    public void RestartGame()
+    public void StartGame()
     {
         targetNumber = Random.Range(1, 11);
         attemptsLeft = maxAttempts;
         UpdateUI("Guess a number between 1 and 10!");
-        inputField.interactable = true; // Re-enable typing
+        inputField.interactable = true; 
     }
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
 
     public void OnSubmit()
     {
@@ -32,37 +49,38 @@ public class GameController : MonoBehaviour
             {
                 UpdateUI("Your Correct! The Number Was " + targetNumber);
                 inputField.interactable = false;
-
+                submitButton.SetActive(false);
+                restartButton.SetActive(true);
             } 
 
             if (playerGuess < targetNumber)
             {
-                UpdateUI("Higher");
+                inputField.ActivateInputField();
                 attemptsLeft--;
-                if (attemptsLeft <= 0)
-                {
-                    UpdateUI("GAME OVER! It was " + targetNumber);
-                    inputField.interactable = false; // Stop typing after loss
-                }
-
+                UpdateUI("Higher");
             }
+
             if (playerGuess > targetNumber)
             {
-                UpdateUI("Lower");
+                inputField.ActivateInputField();
                 attemptsLeft--;
-                if (attemptsLeft <= 0)
-                {
-                    UpdateUI("GAME OVER! It was " + targetNumber);
-                    inputField.interactable = false; // Stop typing after loss
-                }
-
+                UpdateUI("Lower");      
             }
-     
+
+            if (attemptsLeft <= 0)
+            {
+                UpdateUI("GAME OVER! It was " + targetNumber);
+                inputField.DeactivateInputField();
+                inputField.interactable = false;
+                submitButton.SetActive(false);
+                restartButton.SetActive(true);
+            }
+
         }
-        inputField.text = ""; // Clear the box after each guess
+        inputField.text = ""; 
     }
 
-    void UpdateUI(string message)
+    public void UpdateUI(string message)
     {
         feedbackText.text = message;
         attemptsText.text = "Attempts Left: " + attemptsLeft;
