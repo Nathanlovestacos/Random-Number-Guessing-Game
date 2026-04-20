@@ -12,8 +12,8 @@ public class GameController : MonoBehaviour
     public GameObject submitButton;
 
     public int targetNumber;
-    private int attemptsLeft;
-    public int maxAttempts = 3;
+    public int attemptsLeft;
+    public int maxAttempts ;
 
     public static GameController instance;
 
@@ -29,9 +29,7 @@ public class GameController : MonoBehaviour
 
     public void StartGame()
     {
-        targetNumber = Random.Range(1, 11);
         attemptsLeft = maxAttempts;
-        UpdateUI("Guess a number between 1 and 10!");
         inputField.interactable = true; 
     }
     public void Restart()
