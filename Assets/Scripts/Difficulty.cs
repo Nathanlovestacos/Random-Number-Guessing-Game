@@ -21,18 +21,15 @@ public class Difficulty : MonoBehaviour
 
     void Update()
     {
-        
+
     }
-
-   
-
     
 
     public void Easy()
     {
         AudioManager.instance.PlaySFX(1);
         GameController.instance.targetNumber = Random.Range(1, 26);
-        maxAttempts = 10;
+        maxAttempts = 7;
         GameController.instance.attemptsLeft = maxAttempts;
         GameController.instance.UpdateUI("Guess a number between 1 and 25!");
         GameController.instance.inputField.ActivateInputField();

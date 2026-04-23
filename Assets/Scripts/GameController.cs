@@ -1,7 +1,9 @@
 using TMPro;
 using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -73,6 +75,8 @@ public class GameController : MonoBehaviour
                 submitButton.SetActive(false);
                 restartButton.SetActive(true);
             }
+
+           
 
         }
         inputField.text = ""; 
