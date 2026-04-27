@@ -1,10 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
     public AudioSource[] soundEffects;
 
     public static AudioManager instance;
+
+    private double audioChance = .25;
 
     public void Awake()
     {
@@ -14,8 +17,14 @@ public class AudioManager : MonoBehaviour
     public void PlaySFX(int sound)
     {
         soundEffects[sound].Play();
-    }
 
 
 
-}
+
+
+
+
+
+
+}   }
+

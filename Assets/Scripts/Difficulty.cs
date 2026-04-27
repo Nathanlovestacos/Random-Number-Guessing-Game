@@ -29,7 +29,7 @@ public class Difficulty : MonoBehaviour
     {
         AudioManager.instance.PlaySFX(1);
         GameController.instance.targetNumber = Random.Range(1, 26);
-        maxAttempts = 7;
+        maxAttempts = 5;
         GameController.instance.attemptsLeft = maxAttempts;
         GameController.instance.UpdateUI("Guess a number between 1 and 25!");
         GameController.instance.inputField.ActivateInputField();

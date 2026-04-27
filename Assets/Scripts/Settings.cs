@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Settings : MonoBehaviour
 {
     [SerializeField] Slider volumeSlider;
+
+    public Canvas canvas;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,6 +34,7 @@ public class Settings : MonoBehaviour
         AudioListener.volume = volumeSlider.value;
         Save();
     }
+
 
     private void Load()
     {
